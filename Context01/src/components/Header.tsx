@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useContext } from "react";
+import { LangContext, ThemeContext } from "src/pages/_app";
 import { TodoCounter } from "./TodoCounter";
 
 type Props = {
@@ -7,6 +8,11 @@ type Props = {
 };
 
 export const Header: FC<Props> = ({ todoCount }) => {
+  const theme = useContext(ThemeContext);
+  const lang = useContext(LangContext);
+
+  console.log({ theme, lang });
+
   return (
     <header>
       <nav>

@@ -1,10 +1,19 @@
 import type { NextPage } from "next";
-import { ComponentProps } from "react";
+import { ComponentProps, Dispatch, SetStateAction } from "react";
+import { Todo } from "src/types";
 
-const Home: NextPage = () => {
+type Props = {
+  setTodos: Dispatch<SetStateAction<Todo[]>>;
+};
+
+const Add: NextPage<Props> = ({ setTodos }) => {
   const handleSubmit: ComponentProps<"form">["onSubmit"] = (e) => {
     e.preventDefault();
     const text = e.currentTarget.text.value;
+    setTodos((prevTodos) => {
+      const newTodo = { id: prevTodos.length + 1, text, isDone: false };
+      return [...prevTodos, newTodo];
+    });
     console.log(text);
     e.currentTarget.reset();
   };
@@ -25,4 +34,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Add;
